@@ -2,6 +2,11 @@
   "name": "kurma_hrs",
   "version": "0.1.0",
   "private": true,
+  "engines": {
+    "nodes": ">=14.0.0",
+    "yarn": ">=1.22.0",
+    "npm": "please use yarn"
+  },
   "scripts": {
     "dev": "next dev",
     "build": "next build",
@@ -20,6 +25,7 @@
     "eslint": "^8",
     "eslint-config-next": "14.2.3",
     "postcss": "^8",
+    "prettier": "3.2.5",
     "tailwindcss": "^3.4.1",
     "typescript": "^5"
   }
