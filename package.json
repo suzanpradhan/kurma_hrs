@@ -3,15 +3,17 @@
   "version": "0.1.0",
   "private": true,
   "engines": {
-    "nodes": ">=14.0.0",
+    "nodes": ">=18.0.0",
     "yarn": ">=1.22.0",
     "npm": "please use yarn"
   },
   "scripts": {
     "dev": "next dev",
     "build": "next build",
+    "test": "next test",
     "start": "next start",
-    "lint": "next lint"
+    "lint": "next lint",
+    "prepare": "husky"
   },
   "dependencies": {
     "next": "^14.2.3",
@@ -19,6 +21,8 @@
     "react-dom": "^18.3.1"
   },
   "devDependencies": {
+    "@commitlint/cli": "^19.3.0",
+    "@commitlint/config-conventional": "^19.2.2",
     "@types/node": "^20",
     "@types/react": "^18",
     "@types/react-dom": "^18",
