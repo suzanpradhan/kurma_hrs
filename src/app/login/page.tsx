@@ -6,7 +6,7 @@ const page = () => {
           HRS Administration
         </div>
       </div>
-      <div className="p-44 w-[700px] h-[429px] mt-[176px] relative bg-white right-[175px] flex justify-center items-center">
+      <div className="p-44 w-[700px] h-[429px] mt-[176px] relative bg-white right-[177px] flex justify-center items-center">
         <div className="">
           <h1 className="text-2xl mb-8 px-28">Sign In</h1>
           <div className="mb-4">
