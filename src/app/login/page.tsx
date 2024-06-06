@@ -1,7 +1,7 @@
 const page = () => {
   return (
     <div className="min-h-screen min-w-full flex justify-center items-center bg-[#1e1e1e]">
-      <div className="flex ml-[320px] mt-20 ">
+      <div className="flex mt-10 ">
         <div className="p-44">
           <div className="h-[429px] w-[400px] bg-[#2B2F38] text-white p-4">
             HRS Administration

@@ -42,17 +42,24 @@ const cardData = [
   },
 ];
 
+export function generateMetadata() {
+  return {
+    title: 'Dishboard',
+    description: 'dashboard ....',
+  };
+}
+
 const Page = () => {
   return (
     <React.Fragment>
-      <div className="text-2xl font-semibold ml-16 py-8 text-black">
+      <div className="text-2xl font-semibold ml-12 py-8 text-black">
         Dashboard
       </div>
-      <div className="flex flex-wrap ml-16 gap-4">
+      <div className="flex flex-wrap ml-12 gap-4 cursor-pointer">
         {cardData.map((card, index) => (
           <div
             key={index}
-            className="w-[275px] h-[75px] border-2 rounded-md p-4"
+            className="w-[275px] h-[75px] border-2 rounded-md p-4 transition-all duration-300 hover:bg-gray-100 hover:shadow-lg hover:border-blue-500 "
           >
             <div className="w-10 h-10 border-2 rounded-full flex items-center justify-center">
               {card.icon}
@@ -63,10 +70,10 @@ const Page = () => {
             <p className="relative ml-12 bottom-[48px] text-[#494949]">
               {card.label}
             </p>
-            <p className="relative ml-[180px] bottom-[75px] text-[#494949]">
+            <div className="relative ml-[180px] bottom-[75px] text-[#494949]">
               {card.percentage}
-              <p className="relative right-1">{card.arrowIcon}</p>
-            </p>
+              <span className="relative right-1">{card.arrowIcon}</span>
+            </div>
           </div>
         ))}
       </div>

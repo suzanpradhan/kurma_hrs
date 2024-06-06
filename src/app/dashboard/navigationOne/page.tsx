@@ -1,5 +1,11 @@
+export function generateMetadata() {
+  return {
+    title: 'Navigation One',
+    description: 'Navigation One ....',
+  };
+}
 const page = () => {
-  return <div>NavigationOne</div>;
+  return <></>;
 };
 
 export default page;
