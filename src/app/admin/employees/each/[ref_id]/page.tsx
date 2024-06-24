@@ -1,14 +1,17 @@
 'use client';
-import { TextField } from '@/core/ui/karma/src/components';
+import { useAppDispatch } from '@/core/redux/clientStore';
 import Buttons from '@/core/ui/karma/src/components/Buttons';
 import FormCard from '@/core/ui/karma/src/components/Form/FormCard';
 import FormGroup from '@/core/ui/karma/src/components/Form/FormGroup';
+import TextField from '@/core/ui/karma/src/components/TextField';
 import { nonempty } from '@/core/utils/formUtils';
 import {
   useCreateUserMutation,
-  useGetMembersQuery,
+  useGetEachMemberQuery,
+  useUpdateMemberMutation,
 } from '@/modules/members/GetMembersApi';
 import { useFormik } from 'formik';
+import { useParams, useRouter } from 'next/navigation';
 import { z } from 'zod';
 import { toFormikValidate } from 'zod-formik-adapter';
 
@@ -20,28 +23,35 @@ const memberSchema = z.object({
 
 type MemberType = z.infer<typeof memberSchema>;
 
-const EmployeesMutationPage = () => {
-  const [createUser, { isLoading }] = useCreateUserMutation();
-  const { refetch: refetchMembers } = useGetMembersQuery(1);
+const EmployeesEachPage = () => {
+  const dispatch = useAppDispatch();
+  const [updateMember] = useUpdateMemberMutation();
+  const userId = useParams();
+  const { data: member } = useGetEachMemberQuery(userId.ref_id as string);
+  const router = useRouter();
+  console.log('userId.ref_id', userId.ref_id);
+  const [createUser, { isLoading: isCreateUserLoading }] =
+    useCreateUserMutation();
 
   const handleSubmit = async (data: MemberType) => {
     try {
-      await createUser(data).unwrap();
-      alert('User created successfully');
+      await updateMember({ ...data }).unwrap();
+      // await createUser(data).unwrap();
       formik.resetForm();
-      refetchMembers();
+      alert('User Updated successfully');
+      router.push('/admin/employees/allemployees/');
     } catch (error) {
-      console.error('Failed to create user:', error);
-      alert('Failed to create user');
+      console.error('Failed Update user:', error);
+      alert('Failed to Update user');
     }
   };
 
   const formik = useFormik({
     enableReinitialize: true,
     initialValues: {
-      id: undefined,
-      order: 0,
-      fullname: '',
+      id: member?.id ?? 0,
+      order: member?.order ?? 0,
+      fullname: member?.fullname ?? '',
     },
     validate: toFormikValidate(memberSchema),
     onSubmit: handleSubmit,
@@ -82,7 +92,7 @@ const EmployeesMutationPage = () => {
           text="Submit"
           className="h-8 w-fit"
           type="submit"
-          isLoading={isLoading}
+          isLoading={isCreateUserLoading}
         />
         <Buttons text="Cancel" className="h-8 w-fit" type="reset" />
       </div>
@@ -90,4 +100,4 @@ const EmployeesMutationPage = () => {
   );
 };
 
-export default EmployeesMutationPage;
+export default EmployeesEachPage;
